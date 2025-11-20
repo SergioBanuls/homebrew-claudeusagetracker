@@ -2,10 +2,10 @@ cask "claudeusagetracker" do
   version "1.2.0"
   sha256 "9b5d2592770f906cc7992edae594ca310303dd668af12e1b5d12956c6c59201c"
 
-  url "https://github.com/SergioBanuls/ClaudeUsageTracker/releases/download/v#{version}/ClaudeUsageTracker-v#{version}.dmg"
+  url "https://github.com/masmovil/ClaudeUsageTracker/releases/download/v#{version}/ClaudeUsageTracker-v#{version}.dmg"
   name "Claude Usage Tracker"
-  desc "Track your Claude Code API usage from your macOS menu bar"
-  homepage "https://github.com/SergioBanuls/ClaudeUsageTracker"
+  desc "⚠️ DEPRECATED: This tap has moved to masmovil/claudeusagetracker"
+  homepage "https://github.com/masmovil/ClaudeUsageTracker"
 
   livecheck do
     url :url
@@ -14,11 +14,18 @@ cask "claudeusagetracker" do
 
   app "ClaudeUsageTracker.app"
 
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-cr", "#{appdir}/ClaudeUsageTracker.app"],
-                   sudo: false
-  end
+  caveats <<~EOS
+    ⚠️  IMPORTANT: This tap has been moved.
+    
+    Please uninstall this version and use the new tap:
+    
+      brew uninstall --cask claudeusagetracker
+      brew untap SergioBanuls/claudeusagetracker
+      brew tap masmovil/claudeusagetracker
+      brew install --cask masmovil/claudeusagetracker/claudeusagetracker
+    
+    New repository: https://github.com/masmovil/homebrew-claudeusagetracker
+  EOS
 
   zap trash: [
     "~/Library/Preferences/com.claudeusage.tracker.plist",
